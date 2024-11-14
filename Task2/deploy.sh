@@ -10,12 +10,13 @@ docker build -t trio-task-mysql:5.7 db
 docker build -t trio-task-flask-app:latest flask-app
 # run mysql container
 docker run -d \
+    -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
     --name mysql \
     --network trio-task-network \
     trio-task-mysql:5.7
 # run flask container
 docker run -d \
-    -e MYSQL_ROOT_PASSWORD=password \
+    -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
     --name flask-app \
     --network trio-task-network \
     trio-task-flask-app:latest
